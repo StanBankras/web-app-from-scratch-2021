@@ -2,7 +2,7 @@ import { getCoinTwitterTimeline, getTopCoins, getCoinEvents } from './coinpaprik
 import { getLatestItemByDate, append } from './utils.js';
 
 let listedCoins = {};
-const mainContent = document.querySelector('main');
+const mainContent = document.querySelector('main .container');
 
 main();
 
@@ -18,6 +18,7 @@ async function main() {
       coinObject[coin.id].tweet = getLatestItemByDate(tweets, 'date');
       coinObject[coin.id].event = getLatestItemByDate(events, 'date');
       coinObject[coin.id].name = coin.name;
+      coinObject[coin.id].rank = coin.rank;
     }
 
     listedCoins = coinObject;
@@ -34,4 +35,5 @@ function renderCoins() {
       append(mainContent, 'p', { innerHTML: JSON.stringify(value) })
     }
   });
+  document.querySelector('#loading').remove();
 }

@@ -27,7 +27,7 @@ export async function getCoinById(id) {
 }
  
 export async function getCoinTwitterTimeline(id) {
-  return await cpData(`/coins/${id}/twitter`);
+  return await cpData(`/coins/${id}/twitter`) || [];
 }
  
 export async function getCoinEvents(id) {

@@ -1,13 +1,9 @@
 const cpBaseUrl = 'https://api.coinpaprika.com/v1';
 
-const rateLimitMs = 100;
-let rateLimitTempDate = Date.now();
-
 export async function cpData(url) {
-  await new Promise((resolve, reject) => setTimeout(resolve(), Math.min(rateLimitTempDate + rateLimitMs - Date.now(), 100)));
+  await new Promise((resolve, reject) => setTimeout(() => resolve(), 50));
 
   const res = await fetch(cpBaseUrl + url);
-  rateLimitTempDate = Date.now();
   return await res.json();
 }
 
