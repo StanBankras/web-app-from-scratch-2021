@@ -22,6 +22,7 @@ export default async function renderOverview() {
       coinObject.event = getLatestItemByDate(data[1] || [], 'date');
       coinObject.ohlc = data[2];
       coinObject.name = coin.name;
+      coinObject.id = coin.id;
       coinObject.rank = coin.rank;
 
       renderCoin(coinObject);
@@ -32,6 +33,12 @@ export default async function renderOverview() {
 }
 
 function renderCoin(coin) {
+  const name = document.createElement('a');
+  const linkText = document.createTextNode(coin.name);
+  name.href = `#/coin/${coin.id}`;
+  name.appendChild(linkText)
+  mainContent.append(name);
+
   if(coin.tweet) {
     const tweet = makeTweet(coin.tweet.user_name, coin.tweet.user_image_link, coin.tweet.user_name, coin.tweet.status, coin.tweet.date);
     insertHTML(mainContent, tweet, 'beforeEnd');

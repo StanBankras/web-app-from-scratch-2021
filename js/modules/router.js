@@ -1,4 +1,5 @@
 import overview from '../components/overview.js';
+import coinDetail from '../components/coindetail.js';
 
 const data = [
   {
@@ -8,7 +9,8 @@ const data = [
   },
   {
     path: '#/coin/:id',
-    title: 'Coin details'
+    title: 'Coin details',
+    enter: coinDetail
   },
   {
     path: '#/404',
@@ -18,10 +20,6 @@ const data = [
 
 export default router
   .add(data, function() {})
-  .onExit((route) => {
-    // Clear the page
-  })
-  .rescue(() => {
-    location.href = '#/404';
-  })
+  .onExit((route) => document.querySelector('main .container').innerHTML = '')
+  .rescue(() => location.href = '#/404')
   .listen('#')

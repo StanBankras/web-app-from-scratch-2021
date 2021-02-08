@@ -2,7 +2,7 @@ const cpBaseUrl = 'https://api.coinpaprika.com/v1';
 let coins = [];
 
 async function cpData(url) {
-  await new Promise((resolve, reject) => setTimeout(() => resolve(), 50));
+  await new Promise((resolve, reject) => setTimeout(() => resolve(), 100));
 
   const res = await fetch(cpBaseUrl + url);
   return await res.json();
