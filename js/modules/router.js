@@ -1,7 +1,7 @@
 import overview from '../components/overview.js';
 import coinDetail from '../components/coindetail.js';
 
-const data = [
+const routes = [
   {
     path: '#/',
     title: 'Home',
@@ -19,7 +19,7 @@ const data = [
 ]
 
 export default router
-  .add(data, function() {})
-  .onExit((route) => document.querySelector('main .container').innerHTML = '')
+  .add(routes)
+  .onExit(() => document.querySelector('main .container').innerHTML = '')
   .rescue(() => location.href = '#/404')
-  .listen('#')
+  .listen('#');

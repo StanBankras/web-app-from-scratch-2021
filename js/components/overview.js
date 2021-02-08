@@ -5,7 +5,7 @@ import { makeTweet, insertHTML } from '../modules/templating.js';
 const mainContent = document.querySelector('main .container');
 const loading = document.querySelector('#loading');
 
-export default async function renderOverview() {
+export default async function renderOverview(params) {
   try {
     // Get top 20 coins by rank and render them
     for(let i = 1; i <= 20; i++) {
@@ -34,7 +34,7 @@ export default async function renderOverview() {
 
 function renderCoin(coin) {
   const name = document.createElement('a');
-  const linkText = document.createTextNode(coin.name);
+  const linkText = document.createTextNode(`${coin.rank} - ${coin.name}`);
   name.href = `#/coin/${coin.id}`;
   name.appendChild(linkText)
   mainContent.append(name);

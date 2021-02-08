@@ -1,16 +1,3 @@
-export function appendEl(renderOn, el, data) {
-  const element = document.createElement(el);
-
-  if(data.innerHTML) element.innerHTML = data.innerHTML;
-  if(data.attributes) {
-    Object.keys(data.attributes).forEach(attr => {
-      element[attr] = data.attributes[attr];
-    });
-  }
-
-  renderOn.appendChild(element);
-}
-
 // Generate HTML that fills Tweet content
 export function makeTweet(name, imageUrl, handle, text, date) {
   return `
