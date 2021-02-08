@@ -1,3 +1,5 @@
+import cache from './cache.js';
+
 const cpBaseUrl = 'https://api.coinpaprika.com/v1';
 let coins = [];
 
@@ -13,17 +15,14 @@ export async function getGlobalMarketData() {
 }
 
 export async function getAllCoins() {
-  const cached = localStorage.getItem('coins');
+  const cached = cache.getItem('coins');
   if(cached) {
-    const parsed = JSON.parse(cached);
-    if(new Date(parsed.expiryDate).getTime() > Date.now()) {
-      coins = parsed.coins;
-      return coins;
-    }
+    coins = cached.data;
+    return cached.data;
   }
 
   coins = await cpData('/coins');
-  localStorage.setItem('coins', JSON.stringify({ coins, expiryDate: new Date(Date.now() + 3600000) }));
+  cache.setItem('coins', coins);
   
   return coins;
 }
@@ -53,9 +52,26 @@ export async function getTodayOHLC(id) {
 }
  
 export async function getCoinTwitterTimeline(id) {
-  const data = await cpData(`/coins/${id}/twitter`) || [];
+  const cached = cache.getItem('tweets');
+  if(cached && cached.data[id]) {
+    return cached.data[id];
+  }
+
+  let data = await cpData(`/coins/${id}/twitter`) || [];
   // Filter retweets
-  return data.filter(d => !d.is_retweet);
+  data = data.filter(d => !d.is_retweet);
+
+  let tweets = { data: {} };
+  if(cache.exists('tweets')) {
+    tweets = cache.getItem('tweets').data;
+    tweets[id] = data;
+  } else {
+    tweets[id] = data;
+  }
+
+  cache.setItem('tweets', tweets);
+
+  return data;
 }
  
 export async function getCoinEvents(id) {

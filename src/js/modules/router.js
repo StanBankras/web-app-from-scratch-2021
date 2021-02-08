@@ -1,5 +1,5 @@
-import overview from '../components/overview.js';
-import coinDetail from '../components/coindetail.js';
+import overview from '../views/overview.js';
+import coinDetail from '../views/coindetail.js';
 
 const routes = [
   {
@@ -22,7 +22,7 @@ export default router
   .add(routes)
   .onExit(() => document.querySelector('main .container').innerHTML = '')
   .rescue(() => location.href = '#/404')
-  .listen('#');
+  .listen('/');
 
 export function init() {
   if(location.href.endsWith('index.html' || location.href.endsWith('/'))) {
