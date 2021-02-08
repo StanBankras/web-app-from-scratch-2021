@@ -52,16 +52,15 @@ export async function getTodayOHLC(id) {
 }
  
 export async function getCoinTwitterTimeline(id) {
-  const cached = cache.getItem('tweets');
-  if(cached && cached.data[id]) {
-    return cached.data[id];
+  if(cache.exists('tweets')) {
+    const cached = cache.getItem('tweets');
+    if(cached.data[id]) return cached.data[id];
   }
 
   let data = await cpData(`/coins/${id}/twitter`) || [];
-  // Filter retweets
   data = data.filter(d => !d.is_retweet);
 
-  let tweets = { data: {} };
+  let tweets = {};
   if(cache.exists('tweets')) {
     tweets = cache.getItem('tweets').data;
     tweets[id] = data;
