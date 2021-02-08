@@ -1,15 +1,13 @@
 import { getCoinTwitterTimeline, getTopCoins, getCoinEvents } from './coinpaprika.js'; 
-import { getLatestItemByDate, append } from './utils.js';
+import { getLatestItemByDate } from './utils.js';
+import { appendEl, makeTweet, insertHTML } from './templating.js';
 import router from './router.js';
 
-let listedCoins = {};
 const mainContent = document.querySelector('main .container');
 
-main();
-
-async function main() {
+(async function() {
   try {
-    const coins = await getTopCoins(20);
+    const coins = await getTopCoins(3);
     let coinObject = {};
 
     for(const coin of coins) {
@@ -22,19 +20,16 @@ async function main() {
       coinObject[coin.id].rank = coin.rank;
     }
 
-    listedCoins = coinObject;
-    renderCoins();
+    renderCoins(coinObject);
   } catch(err) {
     console.error(err);
   }
-}
+})()
 
-function renderCoins() {
-  Object.keys(listedCoins).forEach(coin => {
-    const values = Object.values(listedCoins[coin]);
-    for(const value of values) {
-      append(mainContent, 'p', { innerHTML: JSON.stringify(value) })
-    }
+function renderCoins(coins) {
+  Object.values(coins).forEach(coin => {
+    const tweet = makeTweet(coin.tweet.user_name, coin.tweet.user_image_link, coin.tweet.user_name, coin.tweet.status, coin.tweet.date);
+    insertHTML(mainContent, tweet, 'beforeEnd');
   });
   document.querySelector('#loading').remove();
 }

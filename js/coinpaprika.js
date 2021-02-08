@@ -1,4 +1,4 @@
-import { cpData, append } from './utils.js';
+import { cpData } from './api.js';
 
 let coins = [];
 
@@ -27,7 +27,9 @@ export async function getCoinById(id) {
 }
  
 export async function getCoinTwitterTimeline(id) {
-  return await cpData(`/coins/${id}/twitter`) || [];
+  const data = await cpData(`/coins/${id}/twitter`) || [];
+  // Filter retweets
+  return data.filter(d => !d.is_retweet);
 }
  
 export async function getCoinEvents(id) {

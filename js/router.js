@@ -25,22 +25,12 @@ const resourceEditor = function (params) {
 
 const data = [
   {
-    path: '#/resources',
-    title: 'Resources'
-  }, {
-    path: '#/resource/:id',
-    title: 'Edit resource',
-    enter: resourceEditor
-  }, {
-    path: '#/resource/new',
-    title: 'New resource',
-    enter: resourceEditor
-  }, {
-    path: '#/resource/ext/*',  // the '*' allows hashes that start with
-    title: 'Other resource'    // '#/resources/ext', the complete hash can
-  }, {                         // be obtained from the context.
-    path: '#/login',
-    enter: login
+    path: '#/',
+    title: 'Home'
+  },
+  {
+    path: '#/coin/:id',
+    title: 'Coin details'
   }
 ]
 
@@ -58,13 +48,9 @@ export default router
     console.log(`Leaving ${route ? route.hash : ''}`)
   })
   .onEnter((route) => {
-    // global callback called before run the current route
-    console.log(`Entering ${route.hash}`)
+    console.log(`Entering ${route ? route.hash : ''}`)
   })
   .rescue((hash) => {
-    // executed for non-existing routes or routes without `enter` method
-    location.href = 'errors/404.html'
+    location.href = '404.html'
   })
-  // starts the router using "#/login" for users that arrives to this
-  // page without a hash.
-  .listen('#login')
+  .listen('#')
