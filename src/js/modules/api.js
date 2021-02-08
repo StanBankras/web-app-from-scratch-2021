@@ -52,8 +52,8 @@ export async function getTodayOHLC(id) {
 }
  
 export async function getCoinTwitterTimeline(id) {
-  if(cache.exists('tweets')) {
-    const cached = cache.getItem('tweets');
+  const cached = cache.getItem('tweets');
+  if(cached) {
     if(cached.data[id]) return cached.data[id];
   }
 
@@ -61,8 +61,9 @@ export async function getCoinTwitterTimeline(id) {
   data = data.filter(d => !d.is_retweet);
 
   let tweets = {};
-  if(cache.exists('tweets')) {
-    tweets = cache.getItem('tweets').data;
+  const tweetsCache = cache.getItem('tweets');
+  if(tweetsCache) {
+    tweets = tweetsCache.data;
     tweets[id] = data;
   } else {
     tweets[id] = data;
@@ -74,5 +75,24 @@ export async function getCoinTwitterTimeline(id) {
 }
  
 export async function getCoinEvents(id) {
-  return await cpData(`/coins/${id}/events`);
+  const cached = cache.getItem('events');
+  if(cached) {
+    if(cached.data[id]) return cached.data[id];
+  }
+
+  let data = await cpData(`/coins/${id}/events`) || {};
+
+  let events = {};
+  const eventCache = cache.getItem('events');
+  if(eventCache) {
+    events = eventCache.data;
+    events[id] = data;
+  } else {
+    events[id] = data;
+  }
+
+  cache.setItem('events', events);
+
+  return data;
+
 }

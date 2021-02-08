@@ -12,6 +12,5 @@ export default {
     if(item && isNotExpired(JSON.parse(item))) return JSON.parse(item);
     return undefined;
   },
-  setItem: (name, data) => localStorage.setItem(name, JSON.stringify({ data, expiryDate: cacheExpiry() })),
-  exists: (name) => localStorage.hasOwnProperty(name)
+  setItem: (name, data) => localStorage.setItem(name, JSON.stringify({ data, expiryDate: cacheExpiry() }))
 }
