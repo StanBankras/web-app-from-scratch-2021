@@ -2,12 +2,21 @@ import cache from './cache.js';
 
 const cpBaseUrl = 'https://api.coinpaprika.com/v1';
 let coins = [];
+let rateLimitPromise = Promise.resolve();
 
 async function cpData(url) {
-  await new Promise((resolve, reject) => setTimeout(() => resolve(), 100));
+  return new Promise((resolve, reject) => {
+    rateLimitPromise = rateLimitPromise.then(async () => {
+      try {
+        const res = await fetch(cpBaseUrl + url);
+        const result = await res.json();
+        setTimeout(() => resolve(result), 100);
+      } catch(err) {
+        reject(err);
+      }
+    });
+  });
 
-  const res = await fetch(cpBaseUrl + url);
-  return await res.json();
 }
 
 export async function getGlobalMarketData() {
