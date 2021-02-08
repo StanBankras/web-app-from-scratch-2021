@@ -23,3 +23,9 @@ export default router
   .onExit(() => document.querySelector('main .container').innerHTML = '')
   .rescue(() => location.href = '#/404')
   .listen('#');
+
+export function init() {
+  if(location.href.endsWith('index.html' || location.href.endsWith('/'))) {
+    router.navigate('#/', true);
+  }
+}
