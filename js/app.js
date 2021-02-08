@@ -1,5 +1,6 @@
 import { getCoinTwitterTimeline, getTopCoins, getCoinEvents } from './coinpaprika.js'; 
 import { getLatestItemByDate, append } from './utils.js';
+import router from './router.js';
 
 let listedCoins = {};
 const mainContent = document.querySelector('main .container');

@@ -7,7 +7,7 @@ export async function getGlobalMarketData() {
 }
 
 export async function getAllCoins() {
-  coins = await cpData('/coins')
+  coins = await cpData('/coins');
   return coins;
 }
 
