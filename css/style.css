@@ -25,4 +25,26 @@ header h1 {
   margin: 0 auto;
   padding: 0 2rem;
 }
+
+.tweet {
+  max-width: 600px;
+  background-color: white;
+  padding: 1rem;
+  border: 1px solid black;
+  margin-bottom: 1rem;
+}
+
+.tweet .top {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  margin-bottom: 0.5rem;
+}
+
+.tweet .top img {
+  margin-right: 1rem;
+}
 /*# sourceMappingURL=style.css.map */

@@ -11,7 +11,7 @@ export async function getAllCoins() {
   return coins;
 }
 
-export async function getTopCoins(until) {
+export async function getTopCoins(from, until) {
   if(coins.length === 0) await getAllCoins();
   return coins
     .sort((a, b) => {
@@ -19,11 +19,15 @@ export async function getTopCoins(until) {
       if(b.rank === 0) return -1;
       return b.rank < a.rank ? 1 : -1;
     })
-    .slice(0, until);
+    .slice(from, until);
 }
  
 export async function getCoinById(id) {
   return coins.find(c => c.id === id) || await cpData(`/coins/${id}`);
+}
+
+export async function getTodayOHLC(id) {
+  return await cpData(`/coins/${id}/ohlcv/today/`);
 }
  
 export async function getCoinTwitterTimeline(id) {
