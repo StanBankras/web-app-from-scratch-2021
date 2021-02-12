@@ -21,21 +21,66 @@ header {
 .container {
   max-width: 1300px;
   margin: 0 auto;
-  padding: 0 2rem;
+  padding: 0 3rem;
 }
 
 .tweet {
-  max-width: 600px;
   background-color: white;
   padding: 1rem;
   border: 1px solid black;
-  margin-bottom: 1rem;
   .top {
     display: flex;
     align-items: center;
     margin-bottom: 0.5rem;
     img {
       margin-right: 1rem;
+      border-radius: 100%;
     }
+  }
+}
+
+.event {
+  padding: 1rem;
+  background-color: white;
+  border: 1px solid black;
+}
+
+.coin {
+  background-color: #F2F2F2;
+  padding: 1rem;
+  margin-bottom: 2rem;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  min-width: 51%;
+  border: 2px dashed transparent;
+  h3 {
+    margin-bottom: 1rem;
+  }
+  .rank {
+    position: absolute;
+    left: 0;
+    top: 0;
+    transform: translateX(-100%);
+    width: 50px;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #77C9FF;
+    color: white;
+    font-weight: bold;
+  }
+  a {
+    text-decoration: none;
+    color: unset;
+  }
+  .wrapper {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+  }
+  &:hover {
+    border-color: #77C9FF;
   }
 }
