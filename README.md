@@ -22,6 +22,12 @@ I have chosen to work with the [Coinpaprika API](https://api.coinpaprika.com/). 
 ## Concept
 The concept is to make an alternative to [Coinpaprika](https://coinpaprika.com/) where I show upcoming events and most recent tweets of a project, instead of raw data. This could help a normal person to better understand what is about to happen to the project that is behind the coin.
 
+## Actor diagram
+![Actor diagram](https://github.com/StanBankras/web-app-from-scratch-2021/blob/master/public/img/actor-diagram.png?raw=true)
+
+## Interaction diagram
+![Interaction diagram](https://github.com/StanBankras/web-app-from-scratch-2021/blob/master/public/img/interaction-diagram.png?raw=true)
+
 ## Installation
 
 ## Features
