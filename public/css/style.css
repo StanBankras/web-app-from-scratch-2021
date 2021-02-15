@@ -57,6 +57,10 @@ header h1 {
   border: 1px solid black;
 }
 
+.event .date {
+  margin-top: 1rem;
+}
+
 .coin {
   background-color: #F2F2F2;
   padding: 1rem;
