@@ -19,10 +19,6 @@ async function cpData(url) {
 
 }
 
-export async function getGlobalMarketData() {
-  return await cpData('/global');
-}
-
 export async function getAllCoins() {
   const cached = cache.getItem('coins');
   if(cached) {
@@ -51,13 +47,30 @@ export async function getCoinByRank(rank) {
   if(coins.length === 0) await getAllCoins();
   return coins.find(c => c.rank === rank);
 }
- 
-export async function getCoinById(id) {
-  return coins.find(c => c.id === id) || await cpData(`/coins/${id}`);
-}
 
 export async function getTodayOHLC(id) {
   return await cpData(`/coins/${id}/ohlcv/today/`);
+}
+
+export async function getCoinMarketsById(id) {
+  const cached = cache.getItem('markets');
+  if(cached) {
+    if(cached.data[id]) return cached.data[id];
+  }
+
+  const data = await cpData(`/coins/${id}/markets`);
+
+  let markets = {};
+  if(cached) {
+    markets = cached.data;
+    markets[id] = data;
+  } else {
+    markets[id] = data;
+  }
+
+  cache.setItem('markets', markets);
+
+  return data;
 }
  
 export async function getCoinTwitterTimeline(id) {
@@ -70,9 +83,8 @@ export async function getCoinTwitterTimeline(id) {
   data = data.filter(d => !d.is_retweet);
 
   let tweets = {};
-  const tweetsCache = cache.getItem('tweets');
-  if(tweetsCache) {
-    tweets = tweetsCache.data;
+  if(cached) {
+    tweets = cached.data;
     tweets[id] = data;
   } else {
     tweets[id] = data;
@@ -92,9 +104,8 @@ export async function getCoinEvents(id) {
   let data = await cpData(`/coins/${id}/events`) || {};
 
   let events = {};
-  const eventCache = cache.getItem('events');
-  if(eventCache) {
-    events = eventCache.data;
+  if(cached) {
+    events = cached.data;
     events[id] = data;
   } else {
     events[id] = data;

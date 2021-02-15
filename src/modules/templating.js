@@ -23,6 +23,22 @@ export function makeEvent(name, description, link, date) {
   `;
 }
 
+export function makeTable(arr) {
+  const table = document.createElement('table');
+  const thead = document.createElement('tr');
+  // Object.keys(arr[0]).forEach(key => insertHTML(thead, `<th>${key}</th>`, 'beforeEnd'));
+
+  arr.forEach(item => {
+    const row = document.createElement('tr');
+    Object.keys(item).forEach(key => insertHTML(row, `<td>${item[key]}</td>`, 'beforeEnd'));
+    table.appendChild(row);
+  });
+
+  console.log(table);
+
+  return table;
+}
+
 // Insert HTML as a string in, before or after element
 export function insertHTML(on, html, position) {
   on.insertAdjacentHTML(position, html);
