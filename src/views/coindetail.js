@@ -1,18 +1,21 @@
 import loader from '../components/loader.js';
-import { getCoinMarketsById } from '../modules/api.js';
+import { getCoinMarketsById, getMonthlyChartData } from '../modules/api.js';
 import { makeTable } from '../modules/templating.js';
 
 const mainContent = document.querySelector('main .container');
 
 export default function coinDetail({ id }) {
-  loader.insert(mainContent, 'Test');
+  let coinName = id.split('-');
+  coinName = coinName.slice(1, coinName.length).join(' ');
+  loader.insert(mainContent, `${coinName} data is loading.`);
 
   // Waiting for coin details first, then start rendering
-  getCoinDetails(id).then(({ markets }) => {
+  getCoinDetails(id).then(({ markets, ohlcv }) => {
     loader.remove();
 
     if(markets) {
       mainContent.appendChild(makeTable(markets));
+      mainContent.appendChild(makeTable(ohlcv));
     }
   });
 }
@@ -30,8 +33,11 @@ async function getCoinDetails(id) {
       }
     });
 
+    const ohlcv = await getMonthlyChartData(id);
+
     return {
-      markets
+      markets,
+      ohlcv
     }
   } catch(err) {
     console.error(err);

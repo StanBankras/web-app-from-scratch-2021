@@ -4,11 +4,21 @@ const cpBaseUrl = 'https://api.coinpaprika.com/v1';
 let coins = [];
 let rateLimitPromise = Promise.resolve();
 
-async function cpData(url) {
+// Rate limit of 100ms, implementation idea by Alex Bankras
+async function cpData(url, params) {
   return new Promise((resolve, reject) => {
     rateLimitPromise = rateLimitPromise.then(async () => {
       try {
-        const res = await fetch(cpBaseUrl + url);
+        let string = cpBaseUrl + url;
+
+        if(params) {
+          string += '?';
+          Object.keys(params).forEach((param, i) => {
+            string += `${i > 0 ? '&' : ''}${param}=${params[param]}`;
+          });
+        }
+
+        const res = await fetch(string);
         const result = await res.json();
         setTimeout(() => resolve(result), 100);
       } catch(err) {
@@ -48,8 +58,27 @@ export async function getCoinByRank(rank) {
   return coins.find(c => c.rank === rank);
 }
 
-export async function getTodayOHLC(id) {
-  return await cpData(`/coins/${id}/ohlcv/today/`);
+export async function getMonthlyChartData(id) {
+  const cached = cache.getItem('ohlcv');
+  if(cached) {
+    if(cached.data[id]) return cached.data[id];
+  }
+
+  const startDate = new Date();
+  startDate.setDate(startDate.getDate() - 30);
+  const data = await cpData(`/coins/${id}/ohlcv/historical`, { start: (startDate.getTime() / 1000).toFixed(0), end: (Date.now() / 1000).toFixed(0) });
+
+  let ohlcv = {};
+  if(cached) {
+    ohlcv = cached.data;
+    ohlcv[id] = data;
+  } else {
+    ohlcv[id] = data;
+  }
+
+  cache.setItem('ohlcv', ohlcv);
+
+  return data;
 }
 
 export async function getCoinMarketsById(id) {
