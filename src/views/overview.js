@@ -6,23 +6,23 @@ import '../modules/disTime.js';
 const mainContent = document.querySelector('main .container');
 const loading = document.querySelector('#loading');
 
-export default async function renderOverview(params) {
+export default async function renderOverview() {
   try {
     // Get top 20 coins by rank and render them
     for(let i = 1; i <= 20; i++) {
       let coin = await getCoinByRank(i);
-      let coinObject = {};
   
       const tweets = getCoinTwitterTimeline(coin.id);
       const events = getCoinEvents(coin.id);
       const data = await Promise.all([tweets, events]);
 
-      coinObject = {};
-      coinObject.tweet = getLatestItemByDate(data[0] || [], 'date');
-      coinObject.event = getLatestItemByDate(data[1] || [], 'date');
-      coinObject.name = coin.name;
-      coinObject.id = coin.id;
-      coinObject.rank = coin.rank;
+      const coinObject = {
+        tweet: getLatestItemByDate(data[0] || [], 'date'),
+        event: getLatestItemByDate(data[1] || [], 'date'),
+        name: coin.name,
+        id: coin.id,
+        rank: coin.rank
+      }
 
       renderCoin(coinObject);
     }
