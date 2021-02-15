@@ -47,6 +47,10 @@ header h1 {
   border-radius: 100%;
 }
 
+.tweet .date {
+  margin-top: 1rem;
+}
+
 .event {
   padding: 1rem;
   background-color: white;

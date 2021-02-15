@@ -1,6 +1,7 @@
 import { getCoinTwitterTimeline, getCoinByRank, getCoinEvents } from '../modules/api.js'; 
 import { getLatestItemByDate } from '../modules/utils.js';
 import { makeTweet, insertHTML, makeEvent } from '../modules/templating.js';
+import '../modules/disTime.js';
 
 const mainContent = document.querySelector('main .container');
 const loading = document.querySelector('#loading');
@@ -64,6 +65,6 @@ function renderCoin(coin) {
   }
 
   link.appendChild(wrapper);
-
   mainContent.appendChild(coinContainer);
+  disTime(0, 'en', true);
 }

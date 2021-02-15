@@ -1,3 +1,4 @@
+
 // Generate HTML that fills Tweet content
 export function makeTweet(name, imageUrl, handle, text, date) {
   return `
@@ -7,7 +8,7 @@ export function makeTweet(name, imageUrl, handle, text, date) {
         <h3 class="handle">@${handle}</h3>
       </div>
       <p class="content">${text}</p>
-      <p class="date">${date}</p>
+      <p class="distime date" data-time="${new Date(date).getTime() / 1000}">${new Date(date).getTime() / 1000}</p>
     </section>
   `;
 }
@@ -17,7 +18,7 @@ export function makeEvent(name, description, link, date) {
     <section class="event">
       <h3><a href="${link}">${name ? name : 'No title'}</a></h3>
       <p class="description">${description ? description : 'No description'}</p>
-      <p class="date">${date ? date : 'No description'}</p>
+      <p class="distime date" data-time="${new Date(date).getTime() / 1000}">${new Date(date).getTime() / 1000}</p>
     </section>
   `;
 }
