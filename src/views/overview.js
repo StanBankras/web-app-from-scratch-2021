@@ -2,11 +2,13 @@ import { getCoinTwitterTimeline, getCoinByRank, getCoinEvents } from '../modules
 import { getLatestItemByDate } from '../modules/utils.js';
 import { makeTweet, insertHTML, makeEvent } from '../modules/templating.js';
 import '../modules/disTime.js';
+import loader from '../components/loader.js';
 
 const mainContent = document.querySelector('main .container');
 const loading = document.querySelector('#loading');
 
 export default async function renderOverview() {
+  loader.insert(mainContent, 'Loading top 20 coins...');
   try {
     // Get top 20 coins by rank and render them
     for(let i = 1; i <= 20; i++) {
@@ -25,7 +27,9 @@ export default async function renderOverview() {
       }
 
       renderCoin(coinObject);
+      loader.reRender(mainContent);
     }
+    loader.remove();
   } catch(err) {
     console.error(err);
   }

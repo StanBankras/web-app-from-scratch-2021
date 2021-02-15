@@ -58,7 +58,8 @@ export async function getCoinMarketsById(id) {
     if(cached.data[id]) return cached.data[id];
   }
 
-  const data = await cpData(`/coins/${id}/markets`);
+  const response = await cpData(`/coins/${id}/markets`);
+  const data = response.slice(0, Math.min(response.length, 20));
 
   let markets = {};
   if(cached) {
