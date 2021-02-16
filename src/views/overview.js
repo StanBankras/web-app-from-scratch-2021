@@ -1,10 +1,12 @@
 import { getCoinTwitterTimeline, getCoinByRank, getCoinEvents } from '../modules/data/api.js'; 
 import { getLatestItemByDate } from '../modules/utils.js';
-import { makeTweet, insertHTML, makeEvent } from '../modules/templating.js';
+import { insertHTML } from '../modules/templating.js';
+import makeTweet from '../components/tweet.js';
+import makeEvent from '../components/event.js';
 import loader from '../components/loader.js';
+import renderError from '../components/states/error.js';
 
 const mainContent = document.querySelector('main .container');
-const loading = document.querySelector('#loading');
 
 export default async function renderOverview() {
   loader.insert(mainContent, 'Loading top 20 coins...');
@@ -12,14 +14,15 @@ export default async function renderOverview() {
     // Get top 20 coins by rank and render them
     for(let i = 1; i <= 20; i++) {
       let coin = await getCoinByRank(i);
-  
-      const tweets = getCoinTwitterTimeline(coin.id);
-      const events = getCoinEvents(coin.id);
-      const data = await Promise.all([tweets, events]);
+      console.log(coin);
+
+      let tweets = getCoinTwitterTimeline(coin.id);
+      let events = getCoinEvents(coin.id);
+      [tweets, events] = await Promise.all([tweets, events]);
 
       const coinObject = {
-        tweet: getLatestItemByDate(data[0] || [], 'date'),
-        event: getLatestItemByDate(data[1] || [], 'date'),
+        tweet: getLatestItemByDate(tweets || [], 'date'),
+        event: getLatestItemByDate(events || [], 'date'),
         name: coin.name,
         id: coin.id,
         rank: coin.rank
@@ -30,13 +33,12 @@ export default async function renderOverview() {
     }
     loader.remove();
   } catch(err) {
-    console.error(err);
+    loader.remove();
+    renderError(mainContent, 'Error while loading coin data. Please try again.', true)
   }
 }
 
 function renderCoin(coin) {
-  if(loading) loading.remove();
-
   const coinContainer = document.createElement('article');
   coinContainer.classList.add('coin');
 

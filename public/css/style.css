@@ -10,6 +10,40 @@ h2 {
   margin-bottom: 1rem;
 }
 
+h1 {
+  margin-bottom: 2rem;
+}
+
+footer {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  padding: 4rem 0;
+}
+
+footer p {
+  margin-right: 1.5rem;
+}
+
+footer img {
+  width: 150px;
+}
+
+.capitalize {
+  text-transform: capitalize;
+}
+
+.error {
+  color: red;
+  margin-bottom: 1rem;
+}
+
 .ct-chart-line {
   margin-bottom: 4rem !important;
   -webkit-transform: scale(1.1);
@@ -100,7 +134,7 @@ svg {
 }
 
 .coin {
-  background-color: #F2F2F2;
+  background-color: #f0f9ff;
   padding: 1rem;
   margin-bottom: 2rem;
   position: relative;

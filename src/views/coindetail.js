@@ -1,59 +1,60 @@
 import loader from '../components/loader.js';
 import { getCoinMarketsById, getMonthlyChartData } from '../modules/data/api.js';
-import { insertHTML, makeTable, renderChart } from '../modules/templating.js';
+import { insertHTML } from '../modules/templating.js';
+import renderLineChart from '../components/linechart.js';
+import makeTable from '../components/table.js';
+import renderError from '../components/states/error.js';
+import CryptoCurrency from '../models/cryptocurrency.js';
 
 const mainContent = document.querySelector('main .container');
 
 export default function coinDetail({ id }) {
-  let coinName = id.split('-');
-  coinName = coinName.slice(1, coinName.length).join(' ');
-  loader.insert(mainContent, `${coinName} data is loading.`);
+  let coin = new CryptoCurrency(id);
+  loader.insert(mainContent, `${coin.coinName} data is loading.`);
 
   // Waiting for coin details first, then start rendering
   getCoinDetails(id).then(({ markets, ohlcv }) => {
     loader.remove();
 
-    const backButton = '<a href="#/" class="back-button">Back to top 20</a>';
+    // Back button
+    insertHTML(mainContent, '<a href="#/" class="back-button">Back to top 20</a>', 'beforeEnd');
 
-    insertHTML(mainContent, backButton, 'beforeEnd');
+    // Page title
+    insertHTML(mainContent, `<h1><span class="capitalize">${coin.coinName}</span> (${coin.ticker}) extra information</h1>`, 'beforeEnd');
 
-    if(ohlcv) {
-      renderChart({
-        on: mainContent,
-        labels: ohlcv.map(d => `${new Date(d.time_open).getDate()}-${new Date(d.time_open).getMonth() + 1}`),
-        series: [ohlcv.map(d => d.close)]
-      });
-    }
+    // Line chart of price data
+    renderLineChart({
+      on: mainContent,
+      labels: ohlcv.map(d => `${new Date(d.time_open).getDate()}-${new Date(d.time_open).getMonth() + 1}`),
+      series: [ohlcv.map(d => d.close)]
+    });
 
+    // Markets data
     insertHTML(mainContent, `<h2>Markets</h2>`, 'beforeEnd');
-
-    if(markets) {
-      mainContent.appendChild(makeTable(markets));
-    }
+    mainContent.appendChild(makeTable(markets));
+  }).catch((err) => {
+    console.error(err);
+    loader.remove();
+    renderError(mainContent, `The information for <span class="capitalize">${coinName}</span> could not be found`);
   });
 }
 
 async function getCoinDetails(id) {
-  try {
-    let markets = await getCoinMarketsById(id) || [];
-    markets = markets.map(m => {
-      return {
-        'Exchange': m.exchange_name,
-        'Pair': m.pair,
-        'Name': m.base_currency_name,
-        'Quote currency': m.quote_currency_name,
-        '24h market share': `${m.adjusted_volume_24h_share.toFixed(3)}%`
-      }
-    });
-
-    const ohlcv = await getMonthlyChartData(id);
-
+  let markets = await getCoinMarketsById(id) || [];
+  markets = markets.map(m => {
     return {
-      markets,
-      ohlcv
+      'Exchange': m.exchange_name,
+      'Pair': m.pair,
+      'Name': m.base_currency_name,
+      'Quote currency': m.quote_currency_name,
+      '24h market share': `${m.adjusted_volume_24h_share.toFixed(3)}%`
     }
-  } catch(err) {
-    console.error(err);
-    return undefined;
+  });
+
+  const ohlcv = await getMonthlyChartData(id);
+
+  return {
+    markets,
+    ohlcv
   }
 }

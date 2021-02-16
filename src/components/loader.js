@@ -18,7 +18,8 @@ function insert(on, message) {
 }
 
 function remove() {
-  document.querySelector('#loader').remove();
+  const loader = document.querySelector('#loader');
+  if(loader) loader.remove();
 }
 
 function reRender(on) {

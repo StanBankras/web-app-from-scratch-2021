@@ -11,10 +11,6 @@ const routes = [
     path: '#/coin/:id',
     title: 'Coin details',
     enter: coinDetail
-  },
-  {
-    path: '#/404',
-    title: 'Page not found'
   }
 ]
 

@@ -42,17 +42,6 @@ export async function getAllCoins() {
   return coins;
 }
 
-export async function getTopCoins(from, until) {
-  if(coins.length === 0) await getAllCoins();
-  return coins
-    .sort((a, b) => {
-      if(a.rank === 0) return 1;
-      if(b.rank === 0) return -1;
-      return b.rank < a.rank ? 1 : -1;
-    })
-    .slice(from, until);
-}
-
 export async function getCoinByRank(rank) {
   if(coins.length === 0) await getAllCoins();
   return coins.find(c => c.rank === rank);
