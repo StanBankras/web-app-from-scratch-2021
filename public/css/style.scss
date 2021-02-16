@@ -10,7 +10,8 @@ h2 {
 }
 
 .ct-chart-line {
-  margin-bottom: 2rem !important;
+  margin-bottom: 4rem !important;
+  transform: scale(1.1);
 }
 
 .ct-series-a .ct-line {
@@ -43,6 +44,16 @@ header {
   max-width: 1300px;
   margin: 0 auto;
   padding: 0 3rem;
+  margin-bottom: 2rem;
+}
+
+.back-button {
+  display: inline-block;
+  padding: 0.5rem 1rem;
+  background-color: #77C9FF;
+  color: #1A679A;
+  font-weight: 600;
+  text-decoration: none;
   margin-bottom: 2rem;
 }
 

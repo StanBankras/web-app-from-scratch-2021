@@ -13,6 +13,10 @@ export default function coinDetail({ id }) {
   getCoinDetails(id).then(({ markets, ohlcv }) => {
     loader.remove();
 
+    const backButton = '<a href="#/" class="back-button">Back to top 20</a>';
+
+    insertHTML(mainContent, backButton, 'beforeEnd');
+
     if(ohlcv) {
       renderChart({
         on: mainContent,
