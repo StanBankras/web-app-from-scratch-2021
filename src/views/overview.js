@@ -13,8 +13,7 @@ export default async function renderOverview() {
   try {
     // Get top 20 coins by rank and render them
     for(let i = 1; i <= 20; i++) {
-      let coin = await getCoinByRank(i);
-      console.log(coin);
+      const coin = await getCoinByRank(i);
 
       let tweets = getCoinTwitterTimeline(coin.id);
       let events = getCoinEvents(coin.id);
