@@ -23,6 +23,7 @@ export function makeEvent(name, description, link, date) {
   `;
 }
 
+// Make table from array of objects
 export function makeTable(arr) {
   const table = document.createElement('table');
   const thead = document.createElement('tr');
@@ -44,6 +45,18 @@ export function makeTable(arr) {
   });
 
   return table;
+}
+
+export function renderChart({ on, labels, series }) {
+  const div = document.createElement('div');
+  div.classList.add('ct-chart');
+  on.appendChild(div);
+
+  new Chartist.Line('.ct-chart', { labels, series }, {
+      low: 0,
+      showArea: true,
+      color: 'blue'
+    });
 }
 
 // Insert HTML as a string in, before or after element

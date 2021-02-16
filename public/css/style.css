@@ -6,6 +6,27 @@
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
+h2 {
+  margin-bottom: 1rem;
+}
+
+.ct-chart-line {
+  margin-bottom: 2rem !important;
+}
+
+.ct-series-a .ct-line {
+  stroke: #77C9FF !important;
+  stroke-width: 5px;
+}
+
+.ct-series-a .ct-point {
+  stroke: #358ec9 !important;
+}
+
+.ct-series-a .ct-area {
+  fill: #77C9FF !important;
+}
+
 header {
   background-color: #77C9FF;
   padding: 3rem 0;
@@ -24,6 +45,11 @@ header h1 {
   max-width: 1300px;
   margin: 0 auto;
   padding: 0 3rem;
+  margin-bottom: 2rem;
+}
+
+svg {
+  display: block;
 }
 
 .tweet {
@@ -118,5 +144,25 @@ header h1 {
 
 .coin:hover {
   border-color: #77C9FF;
+}
+
+table {
+  width: 100%;
+}
+
+table th {
+  text-align: left;
+}
+
+table th, table td {
+  padding: 0.5rem;
+}
+
+table tr {
+  background-color: #f1f1f1;
+}
+
+table tr:nth-child(odd) {
+  background-color: white;
 }
 /*# sourceMappingURL=style.css.map */

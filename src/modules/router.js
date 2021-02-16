@@ -21,7 +21,7 @@ const routes = [
 export default router
   .add(routes)
   .onExit(() => document.querySelector('main .container').innerHTML = '')
-  .rescue(() => location.href = '#/404')
+  .rescue(() => location.href = '#/')
   .listen('/');
 
 export function init() {

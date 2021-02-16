@@ -1,6 +1,6 @@
 import loader from '../components/loader.js';
 import { getCoinMarketsById, getMonthlyChartData } from '../modules/api.js';
-import { makeTable } from '../modules/templating.js';
+import { insertHTML, makeTable, renderChart } from '../modules/templating.js';
 
 const mainContent = document.querySelector('main .container');
 
@@ -13,9 +13,18 @@ export default function coinDetail({ id }) {
   getCoinDetails(id).then(({ markets, ohlcv }) => {
     loader.remove();
 
+    if(ohlcv) {
+      renderChart({
+        on: mainContent,
+        labels: ohlcv.map(d => `${new Date(d.time_open).getDate()}-${new Date(d.time_open).getMonth() + 1}`),
+        series: [ohlcv.map(d => d.close)]
+      });
+    }
+
+    insertHTML(mainContent, `<h2>Markets</h2>`, 'beforeEnd');
+
     if(markets) {
       mainContent.appendChild(makeTable(markets));
-      mainContent.appendChild(makeTable(ohlcv));
     }
   });
 }
