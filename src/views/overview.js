@@ -1,7 +1,6 @@
-import { getCoinTwitterTimeline, getCoinByRank, getCoinEvents } from '../modules/api.js'; 
+import { getCoinTwitterTimeline, getCoinByRank, getCoinEvents } from '../modules/data/api.js'; 
 import { getLatestItemByDate } from '../modules/utils.js';
 import { makeTweet, insertHTML, makeEvent } from '../modules/templating.js';
-import '../modules/disTime.js';
 import loader from '../components/loader.js';
 
 const mainContent = document.querySelector('main .container');

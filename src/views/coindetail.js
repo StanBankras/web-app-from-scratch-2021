@@ -1,5 +1,5 @@
 import loader from '../components/loader.js';
-import { getCoinMarketsById, getMonthlyChartData } from '../modules/api.js';
+import { getCoinMarketsById, getMonthlyChartData } from '../modules/data/api.js';
 import { insertHTML, makeTable, renderChart } from '../modules/templating.js';
 
 const mainContent = document.querySelector('main .container');

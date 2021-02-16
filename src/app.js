@@ -1,4 +1,1 @@
-import router, { init } from './modules/router.js';
-import './modules/disTime.js';
-
-init();
+import router from './modules/router.js';
