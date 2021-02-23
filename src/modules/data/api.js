@@ -133,5 +133,4 @@ export async function getCoinEvents(id) {
   cache.setItem('events', events);
 
   return data;
-
 }

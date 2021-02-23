@@ -211,4 +211,8 @@ table tr {
 table tr:nth-child(odd) {
   background-color: white;
 }
+
+.volume {
+  margin-top: 2rem;
+}
 /*# sourceMappingURL=style.css.map */
