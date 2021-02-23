@@ -32,7 +32,7 @@ The concept is to make an alternative to [Coinpaprika](https://coinpaprika.com/)
 ![Actor diagram](https://github.com/StanBankras/web-app-from-scratch-2021/blob/master/public/img/actor-diagram-2.png?raw=true)
 
 ## Interaction diagram
-![Interaction diagram](https://github.com/StanBankras/web-app-from-scratch-2021/blob/master/public/img/interaction-diagram.png?raw=true)
+![Interaction diagram](https://github.com/StanBankras/web-app-from-scratch-2021/blob/master/public/img/interaction-diagram-2.png?raw=true)
 
 ## Installation
 
