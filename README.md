@@ -9,14 +9,15 @@ but I think going back to the roots is a good thing to learn how a framework rea
 <!-- Add a nice poster image here at the end of the week, showing off your shiny frontend 📸 -->
 
 ## Table of contents
-* Chosen API
-* Concept
-* Installation
-* Features
-* Check/wishlist
-* License
+* [Coinpaprika API](https://github.com/StanBankras/web-app-from-scratch-2021#coinpaprika-api)
+* [Concept](https://github.com/StanBankras/web-app-from-scratch-2021#concept)
+* [Features](https://github.com/StanBankras/web-app-from-scratch-2021#features)
+* [Actor diagram](https://github.com/StanBankras/web-app-from-scratch-2021#actor-diagram)
+* [Interaction diagram](https://github.com/StanBankras/web-app-from-scratch-2021#interaction-diagram)
+* [Installation](https://github.com/StanBankras/web-app-from-scratch-2021#installation)
+* [License](https://github.com/StanBankras/web-app-from-scratch-2021#features)
 
-## Chosen API
+## Coinpaprika API
 I have chosen to work with the [Coinpaprika API](https://api.coinpaprika.com/). It's an API that has data of all live cryptocurrencies, ranked based on marketcap. The API is open, always free to use and very friendly to use. Using the API I can retrieve data per coin like on which exchanges it is listed, tweets related to the coin and upcoming events for the coin.
 
 Endpoints used in this project:
@@ -35,6 +36,14 @@ The concept is to make an alternative to [Coinpaprika](https://coinpaprika.com/)
 ![Interaction diagram](https://github.com/StanBankras/web-app-from-scratch-2021/blob/master/public/img/interaction-diagram-2.png?raw=true)
 
 ## Installation
+**1. Clone the repository**
+
+```git clone https://github.com/StanBankras/web-app-from-scratch-2021.git```
+
+**2. Open the project with a liveserver**
+
+Visual Studio Code offers a good live server that opens right from the code editor: [Live server](https://marketplace.visualstudio.com/items?itemName=ritwickdey.LiveServer). 
+
 
 ## Features
 
@@ -44,8 +53,6 @@ The concept is to make an alternative to [Coinpaprika](https://coinpaprika.com/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
 
-<!-- Maybe a table of contents here? 📚 -->
-
 <!-- How about a section that describes how to install this project? 🤓 -->
 
 <!-- ...but how does one use this project? What are its features 🤔 -->
@@ -53,5 +60,3 @@ The concept is to make an alternative to [Coinpaprika](https://coinpaprika.com/)
 <!-- What external data source is featured in your project and what are its properties 🌠 -->
 
 <!-- Maybe a checklist of done stuff and stuff still on your wishlist? ✅ -->
-
-<!-- How about a license here? 📜 (or is it a licence?) 🤷 -->
