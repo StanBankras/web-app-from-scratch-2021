@@ -21,11 +21,18 @@ but I think going back to the roots is a good thing to learn how a framework rea
 ## :sweet_potato: Coinpaprika API
 I have chosen to work with the [Coinpaprika API](https://api.coinpaprika.com/). It's an API that has data of all live cryptocurrencies, ranked based on marketcap. The API is open, always free to use and very friendly to use. Using the API I can retrieve data per coin like on which exchanges it is listed, tweets related to the coin and upcoming events for the coin.
 
-Endpoints used in this project:
+**Base URL**
+The base URL of this API is `https://api.coinpaprika.com/v1/`.
+
+**Endpoints used in this project**:
 * `/coins` - Retrieve all coins listed on Coinpaprika as object with their corresponding coin-id
 * `/coins/${id}/ohlcv/historical` - Retrieve day to day historical price data from a coin
 * `/coins/${id}/markets` - Retrieve trading markets that are active for this coin
 * `/coins/${id}/twitter` & `/coins/${id}/events` - Retrieve latest Tweets & events by this coin's project
+
+**Rate limit**
+
+Coinpaprika limits the amount of requests per IP to [10 per second](https://api.coinpaprika.com/#section/Rate-limit). Make sure to handle this when using the API.
 
 ## :pencil2: Concept
 The concept is to make an alternative to [Coinpaprika](https://coinpaprika.com/) where I show upcoming events and most recent tweets of a project, instead of raw data. This could help a normal person to better understand what is about to happen to the project that is behind the coin.
