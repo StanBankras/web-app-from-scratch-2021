@@ -22,6 +22,7 @@ but I think going back to the roots is a good thing to learn how a framework rea
 I have chosen to work with the [Coinpaprika API](https://api.coinpaprika.com/). It's an API that has data of all live cryptocurrencies, ranked based on marketcap. The API is open, always free to use and very friendly to use. Using the API I can retrieve data per coin like on which exchanges it is listed, tweets related to the coin and upcoming events for the coin.
 
 **Base URL**
+
 The base URL of this API is `https://api.coinpaprika.com/v1/`.
 
 **Endpoints used in this project**:
