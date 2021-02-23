@@ -1,5 +1,9 @@
 # Web app from scratch
 
+![Actor diagram](https://github.com/StanBankras/web-app-from-scratch-2021/blob/master/public/img/front-page.png?raw=true)
+
+![Actor diagram](https://github.com/StanBankras/web-app-from-scratch-2021/blob/master/public/img/detail-page.png?raw=true)
+
 ## [Live website](https://stanbankras.github.io/web-app-from-scratch-2021/)
 
 ## Description
