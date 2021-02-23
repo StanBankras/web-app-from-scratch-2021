@@ -21,6 +21,7 @@ export default router
   .rescue(() => location.href = '#/')
   .listen('/');
 
+// Make sure user is connected to the router on startup
 export function init() {
   if(location.href.endsWith('index.html' || location.href.endsWith('/'))) {
     router.navigate('#/', true);

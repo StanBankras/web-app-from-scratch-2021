@@ -1,7 +1,9 @@
+// Checks if cache item is not expired, by lookign at its expiry date
 function isNotExpired(item) {
   return new Date(item.expiryDate).getTime() > Date.now();
 }
 
+// Add expiry date to new cache item
 function cacheExpiry() {
   return new Date(Date.now() + 3600000);
 }
