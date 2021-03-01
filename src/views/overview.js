@@ -12,6 +12,7 @@ export default async function renderOverview() {
   loader.insert(mainContent, 'Loading top 20 coins...');
   try {
     // Get top 20 coins by rank and render them
+    // Render them 1 by 1, since it can take a while before all are loaded.
     for(let i = 1; i <= 20; i++) {
       const coin = await getCoinByRank(i);
 
