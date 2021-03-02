@@ -16,13 +16,9 @@ export default function coinDetail({ id }) {
   getCoinDetails(id).then(({ markets, ohlcv }) => {
     loader.remove();
 
-    // Back button
     insertHTML(mainContent, '<a href="#/" class="back-button">Back to top 20</a>', 'beforeEnd');
-
-    // Page title
     insertHTML(mainContent, `<h1><span class="capitalize">${coin.coinName}</span> (${coin.ticker}) extra information</h1>`, 'beforeEnd');
 
-    // Line chart of price data
     renderLineChart({
       on: mainContent,
       labels: ohlcv.map(d => `${new Date(d.time_open).getDate()}-${new Date(d.time_open).getMonth() + 1}`),
