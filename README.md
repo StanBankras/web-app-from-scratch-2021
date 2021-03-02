@@ -15,6 +15,7 @@ but I think going back to the roots is a good thing to learn how a framework rea
 * [Features](https://github.com/StanBankras/web-app-from-scratch-2021#features)
 * [Actor diagram](https://github.com/StanBankras/web-app-from-scratch-2021#actor-diagram)
 * [Interaction diagram](https://github.com/StanBankras/web-app-from-scratch-2021#interaction-diagram)
+* [Libraries used](https://github.com/StanBankras/web-app-from-scratch-2021#libraries)
 * [Installation](https://github.com/StanBankras/web-app-from-scratch-2021#installation)
 * [License](https://github.com/StanBankras/web-app-from-scratch-2021#features)
 
@@ -53,6 +54,12 @@ The concept is to make an alternative to [Coinpaprika](https://coinpaprika.com/)
 ## Interaction diagram
 ![Interaction diagram](https://github.com/StanBankras/web-app-from-scratch-2021/blob/master/public/img/interaction-diagram-2.png?raw=true)
 
+## :books: Libraries
+These are the external libraries used in the project:
+* [EasyRouter](https://github.com/aMarCruz/easyrouter) - For handling routes in the app.
+* [Chartist.js](https://gionkunz.github.io/chartist-js/examples.html) - Light weight responsive chart library that is ease to use
+* [disTime.js](https://www.npmjs.com/package/distime) - To convert javascript dates to human readable durations (like '5 days and 4 hours ago')
+
 ## :gear: Installation
 **1. Clone the repository**
 
@@ -64,12 +71,3 @@ Visual Studio Code offers a good live server that opens right from the code edit
 
 ## License
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
-
-
-<!-- How about a section that describes how to install this project? 🤓 -->
-
-<!-- ...but how does one use this project? What are its features 🤔 -->
-
-<!-- What external data source is featured in your project and what are its properties 🌠 -->
-
-<!-- Maybe a checklist of done stuff and stuff still on your wishlist? ✅ -->

@@ -67,5 +67,7 @@ function renderCoin(coin) {
 
   insertHTML(coinContainer, html, 'beforeEnd');
   mainContent.appendChild(coinContainer);
+
+  // Trigger disTime, ideally want to do this just once, but the library doesn't work that way.
   disTime(0, 'en', true);
 }
