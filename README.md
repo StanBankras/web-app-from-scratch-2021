@@ -10,13 +10,13 @@ but I think going back to the roots is a good thing to learn how a framework rea
 ## [Live website](https://stanbankras.github.io/web-app-from-scratch-2021/)
 
 ## Table of contents
-* [Coinpaprika API](https://github.com/StanBankras/web-app-from-scratch-2021#coinpaprika-api)
-* [Concept](https://github.com/StanBankras/web-app-from-scratch-2021#concept)
-* [Features](https://github.com/StanBankras/web-app-from-scratch-2021#features)
+* [Coinpaprika API](https://github.com/StanBankras/web-app-from-scratch-2021#sweet_potato-coinpaprika-api)
+* [Concept](https://github.com/StanBankras/web-app-from-scratch-2021#pencil2-concept)
+* [Features](https://github.com/StanBankras/web-app-from-scratch-2021#rocket-features)
 * [Actor diagram](https://github.com/StanBankras/web-app-from-scratch-2021#actor-diagram)
 * [Interaction diagram](https://github.com/StanBankras/web-app-from-scratch-2021#interaction-diagram)
-* [Libraries used](https://github.com/StanBankras/web-app-from-scratch-2021#libraries)
-* [Installation](https://github.com/StanBankras/web-app-from-scratch-2021#installation)
+* [Libraries used](https://github.com/StanBankras/web-app-from-scratch-2021#books-libraries)
+* [Installation](https://github.com/StanBankras/web-app-from-scratch-2021#gear-installation)
 * [License](https://github.com/StanBankras/web-app-from-scratch-2021#features)
 
 ## :sweet_potato: Coinpaprika API
