@@ -13,7 +13,7 @@ export default function coinDetail({ id }) {
   loader.insert(mainContent, `${coin.coinName} data is loading.`);
 
   // Waiting for coin details first, then start rendering
-  getCoinDetails(id).then(({ markets, ohlcv }) => {
+  getCoinDetails(id).then(({ markets, ohlcv, totalVolume }) => {
     loader.remove();
 
     insertHTML(mainContent, '<a href="#/" class="back-button">Back to top 20</a>', 'beforeEnd');
@@ -28,6 +28,8 @@ export default function coinDetail({ id }) {
     // Markets data
     insertHTML(mainContent, `<h2>Markets</h2>`, 'beforeEnd');
     mainContent.appendChild(makeTable(markets));
+
+    insertHTML(mainContent, `<p class="volume">Total volume: ${totalVolume}</p>`, 'beforeEnd');
   }).catch((err) => {
     console.error(err);
     loader.remove();
@@ -43,14 +45,16 @@ async function getCoinDetails(id) {
       'Pair': m.pair,
       'Name': m.base_currency_name,
       'Quote currency': m.quote_currency_name,
-      '24h market share': `${m.adjusted_volume_24h_share.toFixed(3)}%`
+      '24h volume': `${m.quotes[Object.keys(m.quotes)[0]].volume_24h.toFixed(2)}`
     }
   });
 
   const ohlcv = await getMonthlyChartData(id);
+  const totalVolume = markets.reduce((prev, curr) => prev + Number(curr['24h volume']), 0);
 
   return {
     markets,
-    ohlcv
+    ohlcv,
+    totalVolume
   }
 }

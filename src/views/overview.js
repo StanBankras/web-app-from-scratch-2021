@@ -12,6 +12,7 @@ export default async function renderOverview() {
   loader.insert(mainContent, 'Loading top 20 coins...');
   try {
     // Get top 20 coins by rank and render them
+    // Render them 1 by 1, since it can take a while before all are loaded.
     for(let i = 1; i <= 20; i++) {
       const coin = await getCoinByRank(i);
 
@@ -33,6 +34,7 @@ export default async function renderOverview() {
     loader.remove();
   } catch(err) {
     loader.remove();
+    console.error(err);
     renderError(mainContent, 'Error while loading coin data. Please try again.', true)
   }
 }
@@ -41,34 +43,29 @@ function renderCoin(coin) {
   const coinContainer = document.createElement('article');
   coinContainer.classList.add('coin');
 
-  const wrapper = document.createElement('div');
-  wrapper.classList.add('wrapper');
-
-  const link = document.createElement('a');
-  link.href = `#/coin/${coin.id}`;
-
-  const rank = document.createElement('p');
-  rank.innerText = `#${coin.rank}`;
-  rank.classList.add('rank');
-
-  const name = document.createElement('h3');
-  name.innerText = `${coin.name}`;
-
-  coinContainer.appendChild(rank);
-  coinContainer.appendChild(link);
-  link.appendChild(name);
+  let event;
+  let tweet;
 
   if(coin.tweet) {
-    const tweet = makeTweet(coin.tweet.user_name, coin.tweet.user_image_link, coin.tweet.user_name, coin.tweet.status, coin.tweet.date);
-    insertHTML(wrapper, tweet, 'beforeEnd');
+    tweet = makeTweet(coin.tweet.user_name, coin.tweet.user_image_link, coin.tweet.user_name, coin.tweet.status, coin.tweet.date);
   }
 
   if(coin.event) {
-    const event = makeEvent(coin.event.name, coin.event.description, coin.event.link, coin.event.date);
-    insertHTML(wrapper, event, 'beforeEnd');
+    event = makeEvent(coin.event.name, coin.event.description, coin.event.link, coin.event.date);
   }
 
-  link.appendChild(wrapper);
+  const html = `
+    <p class="rank">#${coin.rank}</p>
+    <a href="#/coin/${coin.id}">
+      <h3>${coin.name}</h3>
+      <div class="wrapper">
+        ${tweet ? tweet : ''}
+        ${event ? event : ''}
+      </div>
+    </a>
+  `;
+
+  insertHTML(coinContainer, html, 'beforeEnd');
   mainContent.appendChild(coinContainer);
   disTime(0, 'en', true);
 }

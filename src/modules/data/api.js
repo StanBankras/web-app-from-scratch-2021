@@ -29,14 +29,18 @@ async function cpData(url, params) {
 
 }
 
+// This structure of caching & retrieving from API is the same for most API functions
 export async function getAllCoins() {
+  // Get data from the cache if available & valid
   const cached = cache.getItem('coins');
   if(cached) {
     coins = cached.data;
     return cached.data;
   }
 
+  // Data is not cached, retrieve from API
   coins = await cpData('/coins');
+  // Cache the retrieved data
   cache.setItem('coins', coins);
   
   return coins;
@@ -54,8 +58,12 @@ export async function getMonthlyChartData(id) {
   }
 
   const startDate = new Date();
+  // Get the date of 30 days ago
   startDate.setDate(startDate.getDate() - 30);
-  const data = await cpData(`/coins/${id}/ohlcv/historical`, { start: (startDate.getTime() / 1000).toFixed(0), end: (Date.now() / 1000).toFixed(0) });
+  const data = await cpData(
+    `/coins/${id}/ohlcv/historical`,
+    { start: (startDate.getTime() / 1000).toFixed(0), end: (Date.now() / 1000).toFixed(0) }
+  );
 
   let ohlcv = {};
   if(cached) {
@@ -77,6 +85,7 @@ export async function getCoinMarketsById(id) {
   }
 
   const response = await cpData(`/coins/${id}/markets`);
+  // Get only 20 markets
   const data = response.slice(0, Math.min(response.length, 20));
 
   let markets = {};
@@ -99,6 +108,7 @@ export async function getCoinTwitterTimeline(id) {
   }
 
   let data = await cpData(`/coins/${id}/twitter`) || [];
+  // Filter retweets to only show tweets done by the coin itself
   data = data.filter(d => !d.is_retweet);
 
   let tweets = {};
@@ -133,5 +143,4 @@ export async function getCoinEvents(id) {
   cache.setItem('events', events);
 
   return data;
-
 }
